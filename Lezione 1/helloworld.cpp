@@ -86,6 +86,9 @@ public:
 	string getCognome() const{
 		return cognome;
 	}
+	int* getB() const{
+		return b;
+	}
 protected:
 };
 
@@ -110,7 +113,9 @@ void stampa3(const Persona& p){
 // attenzione : è un operatore
 ostream& operator <<(ostream& os, const Persona& p){
 	// errore grave : p.stampa()
-	return os << p.getNome() << " " << p.getCognome() << " di eta: " << p.getEta();
+	int* tmp = p.getB();
+	return os << p.getNome() << " " << p.getCognome() << " di eta: " << p.getEta() << ", l'array e': " 
+	<< tmp[0] << " " << tmp[1] << " " << tmp[2] << " " << tmp[3] << " " << tmp[4];
 }
 
 int main(int argc, char *argv[])
