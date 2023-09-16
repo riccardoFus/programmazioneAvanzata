@@ -6,7 +6,7 @@ using namespace std;
 
 // class : costruttore default, distruttore, costruttore copia
 
-// mettere sempre gli attributi sempre privati
+// mettere gli attributi sempre privati
 class Persona{
     // by default : nella classe tutto è privato
 private: 
@@ -25,6 +25,7 @@ public:
        eta = 18;          
        b = NULL;
 	}
+	// quando mettiamo param=value intendiamo che vogliamo dare un valore default al parametro iif non riceve nessun valore come parametro nella chiamata al metodo
 	Persona(string _nome, string _cognome, int _eta=0){
 	    cout << "Costruttore specifico " << nome << cognome << endl;
 	    eta = _eta;
@@ -35,7 +36,8 @@ public:
         	b[i] = i;
 		}
 	}
-	Persona(const Persona& p){ // costruttore copia PROFONDA + passaggio riferimento
+	// costruttore copia PROFONDA + passaggio riferimento
+	Persona(const Persona& p){ 
 		nome = p.nome;
 	 	cognome = p.cognome;
 	 	eta = p.eta;
@@ -114,8 +116,12 @@ void stampa3(const Persona& p){
 ostream& operator <<(ostream& os, const Persona& p){
 	// errore grave : p.stampa()
 	int* tmp = p.getB();
-	return os << p.getNome() << " " << p.getCognome() << " di eta: " << p.getEta() << ", l'array e': " 
-	<< tmp[0] << " " << tmp[1] << " " << tmp[2] << " " << tmp[3] << " " << tmp[4];
+	ostream& returnValue = os << p.getNome() << " " << p.getCognome() << " di eta: " << p.getEta() << ", l'array e': ";
+	if(tmp != NULL){
+		return returnValue << tmp[0] << " " << tmp[1] << " " << tmp[2] << " " << tmp[3] << " " << tmp[4];
+	}else{
+		return returnValue;
+	}
 }
 
 int main(int argc, char *argv[])
@@ -124,7 +130,7 @@ int main(int argc, char *argv[])
     // mario.eta = 33;
     mario.setEta(33);
     // cout << mario.eta << endl;
-    //cout << mario.getEta() << endl;
+    // cout << mario.getEta() << endl;
     Persona anna("Anna", "Rossi", 39);
     // memoria stack -> viene uccisa prima anna e poi mario -> l'ultima ad essere modificata è la prima ad essere eliminata
     anna.stampa();
@@ -136,6 +142,7 @@ int main(int argc, char *argv[])
     stampa2(&anna);
     stampa3(anna);
     cout << "Persona = " << anna << endl;
+    cout << "Persona = " << mario << endl;
     Persona *p;
     p = new Persona("Luca", "Verdi"); // esempio di parametro opzionale, NB: non possono essere scaglionati, solo gli ultimi
     p->stampa();
