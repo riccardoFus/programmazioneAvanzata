@@ -4,9 +4,6 @@
 #include <string>
 using namespace std;
 
-// INDENTAZIONE 2 SPAZI
-
-
 // class : costruttore default, distruttore, costruttore copia
 
 // mettere gli attributi sempre privati
