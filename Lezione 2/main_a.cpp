@@ -49,7 +49,7 @@ void test(Prova p){
 // overload dell'operatore <<
 ostream& operator << (ostream& os, const Prova& p){
 	// questo è possibile iif c'è friend nella classe
-	return os << " " << p.dato << endl;
+	return os << " " << p.dato;
 	// return os << " " << p.getDato() << endl;
 }
 
@@ -68,6 +68,6 @@ int main(int argc, char** argv) {
 	Prova miaP(5);
 	test(miaP);
 	
-	cout << "L'oggetto di prova creato e': " << miaP;
+	cout << "L'oggetto di prova creato e': " << miaP << endl;
 	return 0;
 }
