@@ -6,16 +6,46 @@ class Intero{
 		int val;
 	public:
 		Intero(): val(0){
-			cout << "Costruttore default" << endl;
+			// cout << "Costruttore default" << endl;
 		}
 		Intero(int _val): val(_val){
-			cout << "Costruttore ad un parametro" << endl;
+			// cout << "Costruttore ad un parametro" << endl;
 		}
 		~Intero(){
-			cout << "Distruttore eseguito" << endl;
+			// cout << "Distruttore eseguito" << endl;
+		}
+		Intero operator + (const Intero& i) const {
+			return Intero(this->val + i.val);
+		}
+		Intero operator - (const Intero& i) const {
+			return Intero(this->val - i.val);
+		}
+		Intero operator * (const Intero& i) const {
+			return Intero(this->val * i.val);
+		}
+		Intero operator / (const Intero& i) const {
+			return Intero(this->val / i.val);
 		}
 		Intero operator % (const Intero& i) const{ 
 			return Intero(this->val % i.val);
+		}
+		Intero operator ++ () {
+			val++;
+			return *this;
+		}
+		Intero operator ++ (int)  {
+			Intero temp = *this;
+			val++;
+			return temp;
+		}
+		Intero operator -- () {
+			val--;
+			return *this;
+		}
+		Intero operator -- (int) {
+			Intero temp = *this;
+			val--;
+			return temp;
 		}
 		friend ostream& operator << (ostream& os, const Intero& i);
 		// friend Intero operator % (const Intero& i1, const Intero& i2);
@@ -35,6 +65,23 @@ int main(int argc, char ** argv){
 	Intero a1(4), a2(3);
 	cout << a1 << endl;
 	cout << a2 << endl;
+	cout << "4 + 3" << endl;
+	cout << a1 + a2 << endl;
+	cout << "4 - 3" << endl;
+	cout << a1 - a2 << endl;
+	cout << "4 * 3" << endl;
+	cout << a1 * a2 << endl;
+	cout << "4 / 3" << endl;
+	cout << a1 / a2 << endl;
+	cout << "4 % 3" << endl;
 	cout << a1 % a2 << endl;
+	cout << "a1++" << endl;
+	cout << a1++ << endl;
+	cout << "++a1" << endl;
+	cout << ++a1 << endl;
+	cout << "a1--" << endl;
+	cout << a1-- << endl;
+	cout << "--a1" << endl;
+	cout << --a1 << endl;
 	return 0;
 }
