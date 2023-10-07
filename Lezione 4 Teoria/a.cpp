@@ -23,12 +23,12 @@ int A::get_i(){
 }
 
 void test_A(){
-	A a;
-	cout << a.get_i() << endl;
-	A a3(3);
-	cout << a3.get_i() << endl;
-	cout << quadrato(a3) << endl;
-	cout << raddoppia(a3) << endl;
+	A a; // A::A()
+	cout << a.get_i() << endl; // 0
+	A a3(3); // A::A(int)
+	cout << a3.get_i() << endl; // 3
+	cout << quadrato(a3) << endl; // 9
+	cout << raddoppia(a3) << endl; // 6
 }
 
 int quadrato(A& a){

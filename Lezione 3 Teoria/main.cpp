@@ -1,87 +1,87 @@
 #include <iostream>
+#include <cstdlib>
+#include "complesso.h"
 using namespace std;
 
-class Intero{
-	private:
-		int val;
+class A{
+	int i;
 	public:
-		Intero(): val(0){
-			// cout << "Costruttore default" << endl;
+		A(int _i){
+			i = _i;
 		}
-		Intero(int _val): val(_val){
-			// cout << "Costruttore ad un parametro" << endl;
+		A operator + (const A&);
+		int get_i() const{
+			return i;
 		}
-		~Intero(){
-			// cout << "Distruttore eseguito" << endl;
-		}
-		Intero operator + (const Intero& i) const {
-			return Intero(this->val + i.val);
-		}
-		Intero operator - (const Intero& i) const {
-			return Intero(this->val - i.val);
-		}
-		Intero operator * (const Intero& i) const {
-			return Intero(this->val * i.val);
-		}
-		Intero operator / (const Intero& i) const {
-			return Intero(this->val / i.val);
-		}
-		Intero operator % (const Intero& i) const{ 
-			return Intero(this->val % i.val);
-		}
-		Intero operator ++ () {
-			val++;
-			return *this;
-		}
-		Intero operator ++ (int)  {
-			Intero temp = *this;
-			val++;
-			return temp;
-		}
-		Intero operator -- () {
-			val--;
-			return *this;
-		}
-		Intero operator -- (int) {
-			Intero temp = *this;
-			val--;
-			return temp;
-		}
-		friend ostream& operator << (ostream& os, const Intero& i);
-		// friend Intero operator % (const Intero& i1, const Intero& i2);
+		A& operator ++(); // prefisso
+		A operator ++(int); // postfisso
 };
 
-ostream& operator << (ostream& os, const Intero& i){
-	os << "Valore intero: " << i.val;
-	return os;
-}
-/*
-Intero operator % (const Intero& i1, const Intero& i2){
-	return Intero(i1.val % i2.val);
-}
-*/
+class B{
+	int x;
+	public:
+		B(int _x){
+			x = _x;
+		}
+		int get_x() const{
+			return x;
+		}
+		friend B operator +  (const B&, const B&); // operator + non è più un metodo
+};
 
-int main(int argc, char ** argv){
-	Intero a1(4), a2(3);
-	cout << a1 << endl;
-	cout << a2 << endl;
-	cout << "4 + 3" << endl;
-	cout << a1 + a2 << endl;
-	cout << "4 - 3" << endl;
-	cout << a1 - a2 << endl;
-	cout << "4 * 3" << endl;
-	cout << a1 * a2 << endl;
-	cout << "4 / 3" << endl;
-	cout << a1 / a2 << endl;
-	cout << "4 % 3" << endl;
-	cout << a1 % a2 << endl;
-	cout << "a1++" << endl;
-	cout << a1++ << endl;
-	cout << "++a1" << endl;
-	cout << ++a1 << endl;
-	cout << "a1--" << endl;
-	cout << a1-- << endl;
-	cout << "--a1" << endl;
-	cout << --a1 << endl;
-	return 0;
+A A::operator +(const A& _a){
+	return A(i + _a.i);
+}
+
+A& A::operator ++(){
+	++i;
+	return *this;
+}
+
+A A::operator ++(int){
+	A temp(*this);
+	i++;
+	return temp;
+}
+
+B operator + (const B& b1, const B& b2){
+	return B(b1.get_x() + b2.get_x());
+}
+
+int main(int argc, char** argv) {
+	A a1(1), a2(2), a3(3);
+	cout << "a1 : " << a1.get_i() << endl;
+	cout << "a2 : " << a2.get_i() << endl;
+	cout << "a3 : " << a3.get_i() << endl << endl;
+	a1 = a2 + a3;
+	cout << "a1 : " << a1.get_i() << endl;
+	cout << "a2 : " << a2.get_i() << endl;
+	cout << "a3 : " << a3.get_i() << endl << endl;
+	// a1 = 2 + a3; ERRORE 
+	a1 = a2 + 3; // compila -> conversione implicita di 3 (a1.operator = (a2.operator(A(3))) != (a1.operator = (2.operator(a3))
+	cout << "a1 : " << a1.get_i() << endl;
+	cout << "a2 : " << a2.get_i() << endl;
+	cout << "a3 : " << a3.get_i() << endl << endl;
+	B b1(1), b2(2), b3(3);
+	cout << "b1 : " << b1.get_x() << endl;
+	cout << "b2 : " << b2.get_x() << endl;
+	cout << "b3 : " << b3.get_x() << endl << endl;
+	b1 = b2 + b3;
+	cout << "b1 : " << b1.get_x() << endl;
+	cout << "b2 : " << b2.get_x() << endl;
+	cout << "b3 : " << b3.get_x() << endl << endl;
+	b1 = 2 + b3; // compila in entrambi i casi -> b1.operator + (operator + (B(2), b3)) = b1.operator + (operator + (b2, B(3)))
+	cout << "b1 : " << b1.get_x() << endl;
+	cout << "b2 : " << b2.get_x() << endl;
+	cout << "b3 : " << b3.get_x() << endl << endl;
+	b1 = b2 + 3;
+	cout << "b1 : " << b1.get_x() << endl;
+	cout << "b2 : " << b2.get_x() << endl;
+	cout << "b3 : " << b3.get_x() << endl << endl;
+	++a1;
+	cout << "a1 : " << a1.get_i() << endl << endl;
+	(a1++)++; // esce 7 perché il postfisso restituisce il valore vecchio -> 6 -> 6 -> 7
+	cout << "a1 : " << a1.get_i() << endl << endl;
+	cout << "Testiamo i complessi" << endl << endl;
+	test_Complesso();
 }

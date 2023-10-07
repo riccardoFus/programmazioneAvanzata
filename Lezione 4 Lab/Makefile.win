@@ -1,15 +1,15 @@
-# Project: Lezione 1 Teoria
+# Project: Esercizio1
 # Makefile created by Dev-C++ 5.11
 
-CPP      = g++.exe
-CC       = gcc.exe
+CPP      = g++.exe -std=c++11
+CC       = gcc.exe -std=c++11
 WINDRES  = windres.exe
-OBJ      = b.o a.o main.o
-LINKOBJ  = b.o a.o main.o
+OBJ      = main.o tipocomb.o motore.o automobile.o
+LINKOBJ  = main.o tipocomb.o motore.o automobile.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
-BIN      = "Lezione 1 Teoria .exe"
+BIN      = Esercizio1.exe
 CXXFLAGS = $(CXXINCS) 
 CFLAGS   = $(INCS) 
 RM       = rm.exe -f
@@ -24,11 +24,14 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-b.o: b.cpp
-	$(CPP) -c b.cpp -o b.o $(CXXFLAGS)
-
-a.o: a.cpp
-	$(CPP) -c a.cpp -o a.o $(CXXFLAGS)
-
 main.o: main.cpp
 	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+tipocomb.o: tipocomb.cpp
+	$(CPP) -c tipocomb.cpp -o tipocomb.o $(CXXFLAGS)
+
+motore.o: motore.cpp
+	$(CPP) -c motore.cpp -o motore.o $(CXXFLAGS)
+
+automobile.o: automobile.cpp
+	$(CPP) -c automobile.cpp -o automobile.o $(CXXFLAGS)

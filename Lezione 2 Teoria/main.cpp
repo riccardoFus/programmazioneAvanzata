@@ -1,87 +1,44 @@
-#include <iostream>
 #include <cstdlib>
-#include "complesso.h"
+#include <iostream>
+#include "a.h"
+#include "b.h"
+
 using namespace std;
 
-class A{
-	int i;
-	public:
-		A(int _i){
-			i = _i;
-		}
-		A operator + (const A&);
-		int get_i() const{
-			return i;
-		}
-		A& operator ++(); // prefisso
-		A operator ++(int); // postfisso
-};
-
-class B{
-	int x;
-	public:
-		B(int _x){
-			x = _x;
-		}
-		int get_x() const{
-			return x;
-		}
-		friend B operator +  (const B&, const B&); // operator + non è più un metodo
-};
-
-A A::operator +(const A& _a){
-	return A(i + _a.i);
-}
-
-A& A::operator ++(){
-	++i;
-	return *this;
-}
-
-A A::operator ++(int){
-	A temp(*this);
-	i++;
-	return temp;
-}
-
-B operator + (const B& b1, const B& b2){
-	return B(b1.get_x() + b2.get_x());
-}
-
-int main(int argc, char** argv) {
-	A a1(1), a2(2), a3(3);
-	cout << "a1 : " << a1.get_i() << endl;
-	cout << "a2 : " << a2.get_i() << endl;
-	cout << "a3 : " << a3.get_i() << endl << endl;
-	a1 = a2 + a3;
-	cout << "a1 : " << a1.get_i() << endl;
-	cout << "a2 : " << a2.get_i() << endl;
-	cout << "a3 : " << a3.get_i() << endl << endl;
-	// a1 = 2 + a3; ERRORE 
-	a1 = a2 + 3; // compila -> conversione implicita di 3 (a1.operator = (a2.operator(A(3))) != (a1.operator = (2.operator(a3))
-	cout << "a1 : " << a1.get_i() << endl;
-	cout << "a2 : " << a2.get_i() << endl;
-	cout << "a3 : " << a3.get_i() << endl << endl;
-	B b1(1), b2(2), b3(3);
-	cout << "b1 : " << b1.get_x() << endl;
-	cout << "b2 : " << b2.get_x() << endl;
-	cout << "b3 : " << b3.get_x() << endl << endl;
-	b1 = b2 + b3;
-	cout << "b1 : " << b1.get_x() << endl;
-	cout << "b2 : " << b2.get_x() << endl;
-	cout << "b3 : " << b3.get_x() << endl << endl;
-	b1 = 2 + b3; // compila in entrambi i casi -> b1.operator + (operator + (B(2), b3)) = b1.operator + (operator + (b2, B(3)))
-	cout << "b1 : " << b1.get_x() << endl;
-	cout << "b2 : " << b2.get_x() << endl;
-	cout << "b3 : " << b3.get_x() << endl << endl;
-	b1 = b2 + 3;
-	cout << "b1 : " << b1.get_x() << endl;
-	cout << "b2 : " << b2.get_x() << endl;
-	cout << "b3 : " << b3.get_x() << endl << endl;
-	++a1;
-	cout << "a1 : " << a1.get_i() << endl << endl;
-	(a1++)++; // esce 7 perché il postfisso restituisce il valore vecchio -> 6 -> 6 -> 7
-	cout << "a1 : " << a1.get_i() << endl << endl;
-	cout << "Testiamo i complessi" << endl << endl;
-	test_Complesso();
+int main(int argc, char ** argv){
+	// cosa posso fare con la classe vuota?
+	A a; // costruttore a zero param
+	cout << a.get_i() << endl; // 0
+	A a1; // costruttore a zero param
+	cout << a1.get_i() << endl; // 0
+	a1 = a; // operator =
+	cout << a1.get_i() << endl; // 0
+	A a2(a); // costruttore di copia
+	cout << a2.get_i() << endl; // 0
+	A* pa = new A(a); // costruttore di copia
+	cout << pa->get_i() << endl; // 0
+	delete pa; // distruttore di pa
+	
+	B b("prova"); // costruttore a un param
+	cout << b.get_s() << endl; // prova
+	
+	A a3(1, "prova1"); // costruttore a due param
+	cout << a3.get_i() << " " << a3.get_s() << endl; // 1 prova1
+	
+	a3.set_s("Cambiato"); 
+	a2.set_s("Amilcare");
+	
+	cout << a3.get_s() << endl; // cambiato
+	cout << a2.get_s() << endl; // amilcare
+	
+	a3 = a2; // a3 diventa amilcare
+	
+	cout << a3.get_s() << endl; // amilcare
+	a2.set_s("Alfredo");
+	
+	cout << endl;
+	cout << a2.get_s() << endl; // alfredo
+	cout << a3.get_s() << endl; // amilcare
+	
+	return 0;
 }
