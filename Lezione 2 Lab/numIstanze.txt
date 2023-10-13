@@ -1,4 +1,0 @@
-Numero di istanze = 1
-Numero di istanze = 0
-Numero di istanze = 1
-Numero di istanze = 0
