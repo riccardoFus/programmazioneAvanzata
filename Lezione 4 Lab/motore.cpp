@@ -18,7 +18,7 @@ Motore::Motore(int _cilindrata, Tipocomb* _tipo1){
 Motore::~Motore(){
 	cout << "Distrutto motore di cilindrata " << *this << endl << endl;
 	/*
-	NON SI DISTRUGGONO
+	NON SI DISTRUGGONO SE LOSANGA VUOTA
 	delete tipo1;
 	if(tipo2 != NULL) delete tipo2;
 	*/
@@ -37,7 +37,7 @@ Motore::Motore(int _cilindrata): cilindrata(_cilindrata, Tipocomb tc){
 }
 
 ATTENZIONE -> gli oggetti associati devono essere inizializzati inlinea con la definizione del costruttore
-se noi avessimo un costruttore a 0 parametri di tipocomb posso fare tipo = Tipocomb(_comb) perché si crea prima il
+se noi avessimo un costruttore a 0 parametri di tipocomb posso fare tipo = Tipocomb(_comb) perchï¿½ si crea prima il
 comb poi si crea il motore
 
 */

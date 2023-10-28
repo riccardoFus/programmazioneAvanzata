@@ -12,7 +12,7 @@ class Studente: public Persona{
         ~Studente();
         void stampa();
         ostream& stampaOperator(ostream& os) const; // const è fondamentale!!! DEVE ESSERE UGUALE A QUELLO DI PERSONA
-        void test(){}
+        void test(){};
         friend ostream& operator << (ostream& os, const Studente& s);
 };
 
