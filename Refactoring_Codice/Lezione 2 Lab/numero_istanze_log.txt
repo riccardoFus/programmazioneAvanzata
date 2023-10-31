@@ -1,0 +1,2 @@
+Numero di istanze attuale : 1
+Numero di istanze attuale : 0

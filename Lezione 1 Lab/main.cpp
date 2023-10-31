@@ -14,9 +14,9 @@ int main(int argc, char *argv[])
     // cout << mario.eta << endl;
     // cout << mario.getEta() << endl;
     Persona anna("Anna", "Rossi", 39);
-    // memoria stack -> viene uccisa prima anna e poi mario -> l'ultima ad essere modificata è la prima ad essere eliminata
+    // memoria stack -> viene uccisa prima anna e poi mario -> l'ultima ad essere modificata ï¿½ la prima ad essere eliminata
     anna.stampa();
-    // reminder : c'è una copia non degli elementi ma dell'indirizzo,
+    // reminder : c'ï¿½ una copia non degli elementi ma dell'indirizzo,
 	// quando viene distrutta quest'anna viene distrutto anche l'array
 	// se passiamo una copia di una struct/class con elementi allocati dinamicamente : CASINO -> BISOGNA FARE COPIA PROFONDA
     stampa1(anna);

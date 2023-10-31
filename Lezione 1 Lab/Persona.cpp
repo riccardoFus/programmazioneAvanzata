@@ -101,7 +101,7 @@ void stampa3(const Persona& p){
 
 // overload degli operatori -> devo definire come comportarsi quando riceve un determinato operatore
 // per fare questo devono esserci using namespace std; e <iostream>
-// attenzione : è un operatore
+// attenzione : ï¿½ un operatore
 ostream& operator <<(ostream& os, const Persona& p){
 	// errore grave : p.stampa()
 	int* tmp = p.getB();
