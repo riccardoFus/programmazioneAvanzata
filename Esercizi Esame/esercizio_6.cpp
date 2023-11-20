@@ -43,5 +43,4 @@ int main(int argc, char ** argv){
     multimap<int, string> reversed_multimap;
     reversed_multimap = reverse_multimap(starting_multimap);
     stampa_multimap(reversed_multimap);
-
 }
