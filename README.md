@@ -8,7 +8,21 @@ Per gestire questo problema basta rendere `virtual` le seguenti definizioni:
 `class B: virtual <type> A ... class C: virtual <type> A` e in questo modo quando richiamiamo nei ctor di D i costruttori di B e C viene chiamato il costruttore a zero
 parametri della classe A (*deve essere implementato*). Per chiamare il costruttore a n parametri di A, possiamo richiamarlo nel ctor di D, in generale questa cosa non è
 consentita però nel caso dell'utilizzo della keyword `virtual`, questo è consentito.
-2.
+2. Spiega le eccezioni: cosa sono, come vengono propagate e come vengono utilizzate, con esempi
+- Le eccezioni sono un meccanismo per gestire gli errori di runtime, ovvero errori non rilevabili a tempo di compilazione perché si manifestano solo durante l'esecuzione
+e solo durante alcune particolari situazioni; se non gestite potrebbero portare a situazioni anomale e mal funzionamento del codice.
+Quando si verificano errori di runtime, si possono "lanciare" le eccezioni ovvero si crea un oggetto che appartiene ad una classe particolare, dipendente dallo specifico tipo
+di errore a runtime. Il flusso di esecuzione viene sospeso nel punto in cui si è verificato e salta in un altro punto del codice in cui dovrebbe essere gestito, ed è qui che 
+utilizziamo la sintassi `try{...}catch(exception e);`. Rispettivamente il `try` è il punto del codice in cui eseguiamo il codice che potrebbe portare a certe situazioni di
+eccezione e il `catch` è il blocco che riconosce l'eventuale eccezione e la gestisce. Un blocco `try` può avere associato ad esso $n$ blocchi catch, quando si propaga l'eccezione
+viene cercato nei vari blocchi catch il tipo di eccezione lanciato, se si trova allora si esegue il codice al tipo associato. Le eccezioni possono essere propagate in due modi:
+automaticamente se previsto dall'istruzione che andiamo ad eseguire oppure manualmente attraverso la keyword `throw <type>("messaggio");`
+Abbiamo visto vari esempi di utilizzo `try-catch`, in particolare:
+- `throw "messaggio" catch(...){//gestisce un'eccezione generica}`   
+- `throw "messaggio" catch(const char* messaggio){//stampa messaggio errore}`
+- `throw invalid_argument("messaggio") catch(const invalid_argument& e){cout << e.what() << endl;}`
+- `... catch(exception& e){//funzione come catch(...)}`
+*Nota Bene*: per utilizzare le ultime due classi, bisogna includere la libreria `<stdexcept>`
 3.
 4.
 5.
