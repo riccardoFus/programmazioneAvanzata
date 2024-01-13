@@ -1,6 +1,6 @@
 # Domande teoriche Programmazione Avanzata
 1. Spiega cosa si intende con ereditarietà multipla e come viene realizzata in c++; spiega inoltre cosa è il diamond problem e come viene risolto, con esempio
-L'ereditarietà multipla si ha quando una classe eredita da due o più classi, in c++ è realizzata nel seguente modo:
+- L'ereditarietà multipla si ha quando una classe eredita da due o più classi, in c++ è realizzata nel seguente modo:
 `class C: <type> A1, ..., <type> An` con `<type>` $\in$ {public, private, protected}.
 Il problema del diamante si ha quando due o più superclassi hanno una classe base comune da cui ereditano, in questo caso la classe che eredita da queste superclassi
 avrebbe un'istanza per ogni superclasse delle superclassi e questo può portare a incongruenza tra i dati e non coerenza tra il programma.
